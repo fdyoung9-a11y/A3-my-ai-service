@@ -1,25 +1,271 @@
-button {
+/* 기본 설정 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #eaf2ff, #f7fbff);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #1f2d3d;
+}
+
+/* 메인 박스 */
+.container {
   width: 100%;
-  padding: 14px;
+  max-width: 760px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 40px 32px;
+  box-shadow: 0 14px 40px rgba(37, 99, 235, 0.12);
+}
+
+/* 제목 */
+h1 {
+  text-align: center;
+  color: #2563eb;
+  font-size: 48px;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+
+.subtitle {
+  text-align: center;
+  color: #5b6470;
+  font-size: 18px;
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+/* 탭 버튼 영역 */
+.tab-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+/* 탭 버튼 */
+.tab-btn {
+  flex: 1;
+  padding: 16px 12px;
+  border: none;
+  border-radius: 14px;
+  background: #dbe7ff;
+  color: #2563eb;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.tab-btn:hover {
+  background: #c9dcff;
+}
+
+.tab-btn.active {
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
+}
+
+/* 탭 내용 */
+.tab-content {
+  display: none;
+  background: #f8fbff;
+  border: 1px solid #d7e5ff;
+  border-radius: 18px;
+  padding: 28px 24px;
+  line-height: 1.8;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.tab-content h2 {
+  font-size: 22px;
+  margin-bottom: 16px;
+  color: #1e3a5f;
+}
+
+.tab-content p,
+.tab-content li {
+  font-size: 17px;
+  color: #334155;
+  word-break: keep-all;
+}
+
+.tab-content ul {
+  padding-left: 20px;
+}
+
+/* 입력 영역 */
+.input-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+input[type="text"] {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid #cfd8e3;
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+/* 버튼 */
+button {
+  padding: 14px 22px;
   border: none;
   border-radius: 12px;
   background: #2563eb;
   color: white;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 700;
   cursor: pointer;
-  margin-top: 10px;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 button:hover {
   background: #1d4ed8;
+  transform: translateY(-1px);
 }
 
+/* 결과창 */
 .result-box {
-  margin-top: 16px;
-  padding: 16px;
-  min-height: 60px;
+  margin-top: 18px;
+  padding: 18px;
+  min-height: 72px;
   background: #f8fafc;
   border-left: 5px solid #2563eb;
-  border-radius: 10px;
+  border-radius: 12px;
+  color: #1f2937;
+  font-size: 16px;
+  line-height: 1.7;
+  white-space: pre-line;
+  word-break: keep-all;
+}
+
+/* 안내 문구 */
+.notice {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  body {
+    padding: 14px;
+    align-items: flex-start;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 28px 18px;
+    border-radius: 18px;
+  }
+
+  h1 {
+    font-size: 36px;
+    line-height: 1.3;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    margin-bottom: 22px;
+  }
+
+  .tab-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tab-btn {
+    width: 100%;
+    font-size: 16px;
+    padding: 14px;
+  }
+
+  .tab-content {
+    padding: 22px 18px;
+  }
+
+  .tab-content h2 {
+    font-size: 20px;
+  }
+
+  .tab-content p,
+  .tab-content li {
+    font-size: 16px;
+  }
+
+  .input-group {
+    flex-direction: column;
+  }
+
+  input[type="text"],
+  button {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .result-box {
+    font-size: 15px;
+    padding: 16px;
+  }
+}
+
+/* 작은 모바일 */
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 22px 14px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+  }
+
+  .tab-btn {
+    font-size: 15px;
+    padding: 13px;
+  }
+
+  .tab-content {
+    padding: 18px 14px;
+  }
+
+  .tab-content h2 {
+    font-size: 18px;
+  }
+
+  .tab-content p,
+  .tab-content li,
+  .result-box {
+    font-size: 15px;
+  }
 }
