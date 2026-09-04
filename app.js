@@ -1,38 +1,57 @@
-// 메뉴 버튼과 패널 선택
 const menuButtons = document.querySelectorAll(".menu-btn");
-const contentPanels = document.querySelectorAll(".content-panel");
+const contentBlocks = document.querySelectorAll(".content-block");
+const recommendBtn = document.getElementById("recommend-btn");
+const resultBox = document.getElementById("result");
 
-// 버튼 클릭 시 블록 전환
 menuButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const targetId = button.dataset.target;
 
-    // 버튼 active 초기화
     menuButtons.forEach((btn) => btn.classList.remove("active"));
+    contentBlocks.forEach((block) => block.classList.remove("active"));
 
-    // 패널 active 초기화
-    contentPanels.forEach((panel) => panel.classList.remove("active"));
-
-    // 선택 버튼/패널 활성화
     button.classList.add("active");
     document.getElementById(targetId).classList.add("active");
   });
 });
 
-// 추천 기능
-const recommendBtn = document.getElementById("recommendBtn");
-const destinationInput = document.getElementById("destination");
-const resultBox = document.getElementById("result");
+recommendBtn.addEventListener("click", async () => {
+  const companion = document.getElementById("companion").value;
+  const people = document.getElementById("people").value;
+  const budget = document.getElementById("budget").value;
+  const style = document.getElementById("style").value;
+  const days = document.getElementById("days").value;
 
-recommendBtn.addEventListener("click", () => {
-  const destination = destinationInput.value.trim();
-
-  // 빈 입력 검사
-  if (!destination) {
-    resultBox.textContent = "여행지를 입력해주세요.";
+  if (!companion || !people || !budget || !style || !days) {
+    resultBox.textContent = "모든 항목을 입력해주세요.";
     return;
   }
 
-  // 간단한 추천 메시지
-  resultBox.textContent = `${destination} 여행을 추천합니다. 맛집, 관광지, 휴식 코스를 함께 찾아보세요.`;
+  if (Number(people) < 1) {
+    resultBox.textContent = "인원 수는 1명 이상이어야 합니다.";
+    return;
+  }
+
+  resultBox.textContent = "추천 결과를 불러오는 중입니다...";
+
+  try {
+    const response = await fetch("/api/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        companion,
+        people,
+        budget,
+        style,
+        days
+      })
+    });
+
+    const data = await response.json();
+    resultBox.textContent = data.result || "추천 결과를 불러오지 못했습니다.";
+  } catch (error) {
+    resultBox.textContent = "오류가 발생했습니다. 잠시 후 다시 시도해주세요.";
+  }
 });

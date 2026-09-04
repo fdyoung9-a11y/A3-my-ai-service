@@ -7,65 +7,105 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="app">
-    <!-- 전체 카드 -->
-    <section class="container">
-      <!-- 헤더 -->
-      <header class="hero">
-        <h1>AI 여행 추천 서비스</h1>
-        <p>원하는 여행지를 입력하고 추천을 받아보세요.</p>
-      </header>
+  <div class="container">
+    <header class="hero">
+      <h1>AI 여행 추천 서비스</h1>
+      <p>동행, 인원, 예산, 여행 스타일을 입력하면 맞춤형 여행지를 추천해드립니다.</p>
+    </header>
 
-      <!-- 블록 전환 버튼 -->
-      <nav class="menu" aria-label="서비스 메뉴">
-        <button class="menu-btn active" data-target="intro">서비스 소개</button>
-        <button class="menu-btn" data-target="recommend">여행 추천</button>
-        <button class="menu-btn" data-target="guide">이용 안내</button>
-      </nav>
+    <nav class="menu">
+      <button class="menu-btn active" data-target="intro-block">서비스 소개</button>
+      <button class="menu-btn" data-target="recommend-block">여행 추천 받기</button>
+      <button class="menu-btn" data-target="guide-block">이용 안내</button>
+    </nav>
 
-      <!-- 공통 콘텐츠 박스 -->
-      <section class="content-box">
-        <!-- 소개 블록 -->
-        <div class="content-panel active" id="intro">
-          <h2>서비스 소개</h2>
-          <p>
-            이 서비스는 사용자가 입력한 여행지를 바탕으로
-            간단한 여행 추천 메시지를 제공하는 웹서비스입니다.
-          </p>
+    <main>
+      <section id="intro-block" class="content-block active">
+        <h2>서비스 소개</h2>
+        <p>
+          이 서비스는 사용자의 여행 조건을 바탕으로 어울리는 국내 여행지를 추천해주는
+          AI 여행 추천 웹서비스입니다.
+        </p>
+        <ul>
+          <li>동행 유형 선택</li>
+          <li>인원 수 입력</li>
+          <li>예산 선택</li>
+          <li>여행 스타일 선택</li>
+          <li>여행 기간 선택</li>
+        </ul>
+      </section>
+
+      <section id="recommend-block" class="content-block">
+        <h2>맞춤형 여행 추천</h2>
+
+        <div class="form-group">
+          <label for="companion">누구와 가시나요?</label>
+          <select id="companion">
+            <option value="">선택하세요</option>
+            <option value="혼자">혼자</option>
+            <option value="친구">친구</option>
+            <option value="연인">연인</option>
+            <option value="가족">가족</option>
+          </select>
         </div>
 
-        <!-- 추천 블록 -->
-        <div class="content-panel" id="recommend">
-          <h2>여행 추천</h2>
-          <p class="panel-desc">가고 싶은 여행지를 입력하면 추천 메시지를 보여줍니다.</p>
-
-          <label for="destination" class="input-label">여행지 입력</label>
-          <input
-            type="text"
-            id="destination"
-            class="input-box"
-            placeholder="예: 제주도, 부산, 경주, 도쿄"
-          />
-
-          <button id="recommendBtn" class="action-btn">여행 추천 받기</button>
-
-          <div id="result" class="result-box">
-            아직 결과가 없습니다.
-          </div>
+        <div class="form-group">
+          <label for="people">인원 수</label>
+          <input type="number" id="people" min="1" placeholder="예: 2" />
         </div>
 
-        <!-- 안내 블록 -->
-        <div class="content-panel" id="guide">
-          <h2>이용 안내</h2>
-          <ol class="guide-list">
-            <li>여행 추천 버튼을 클릭합니다.</li>
-            <li>원하는 여행지를 입력합니다.</li>
-            <li>추천 버튼을 눌러 결과를 확인합니다.</li>
-          </ol>
+        <div class="form-group">
+          <label for="budget">예산</label>
+          <select id="budget">
+            <option value="">선택하세요</option>
+            <option value="낮음">낮음</option>
+            <option value="중간">중간</option>
+            <option value="높음">높음</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="style">여행 스타일</label>
+          <select id="style">
+            <option value="">선택하세요</option>
+            <option value="힐링">힐링</option>
+            <option value="맛집">맛집</option>
+            <option value="관광">관광</option>
+            <option value="액티비티">액티비티</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="days">여행 기간</label>
+          <select id="days">
+            <option value="">선택하세요</option>
+            <option value="당일">당일</option>
+            <option value="1박2일">1박2일</option>
+            <option value="2박3일">2박3일</option>
+          </select>
+        </div>
+
+        <button id="recommend-btn" class="primary-btn">여행 추천 받기</button>
+
+        <div id="result" class="result-box">
+          추천 결과가 여기에 표시됩니다.
         </div>
       </section>
-    </section>
-  </main>
+
+      <section id="guide-block" class="content-block">
+        <h2>이용 안내</h2>
+        <ol>
+          <li>여행 추천 받기 메뉴를 누릅니다.</li>
+          <li>동행, 인원, 예산, 스타일, 기간을 입력합니다.</li>
+          <li>여행 추천 받기 버튼을 누릅니다.</li>
+          <li>조건에 맞는 추천 여행지를 확인합니다.</li>
+        </ol>
+        <p class="tip">
+          예: 연인 / 2명 / 중간 / 힐링 / 1박2일 → 감성적인 바다 여행지 추천
+        </p>
+      </section>
+    </main>
+  </div>
 
   <script src="app.js"></script>
 </body>
