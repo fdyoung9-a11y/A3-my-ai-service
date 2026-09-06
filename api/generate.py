@@ -64,15 +64,30 @@ def generate():
 """
 
     try:
-        client = OpenAI(api_key=api_key, timeout=20.0)
-
-        response = client.responses.create(
-            model="gpt-4.1-mini",
-            input=prompt
+        client = OpenAI(
+            api_key=api_key,
+            base_url="https://copa.codyssey.kr/v1",
+            timeout=20.0
         )
 
+        response = client.chat.completions.create(
+            model="gpt-5-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "당신은 국내 여행지를 추천하는 친절한 여행 전문가입니다."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ]
+        )
+
+        result_text = response.choices[0].message.content
+
         return jsonify({
-            "result": response.output_text
+            "result": result_text
         })
 
     except APITimeoutError:
